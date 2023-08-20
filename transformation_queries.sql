@@ -18,3 +18,10 @@ DROP TABLE `taxi_dataset_raw_taxi_dataset`;
 
 SELECT * FROM "taxi_dataset"."transformed_taxi_dataset" 
 where passenger_count is null;
+
+
+CREATE TABLE new_transformed_taxi_dataset AS
+SELECT *,
+  CASE WHEN congestion_surcharge = '' THEN 0 ELSE CAST(congestion_surcharge AS DOUBLE) END AS congestion_surcharge
+FROM
+  transformed_taxi_dataset;
